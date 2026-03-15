@@ -170,11 +170,23 @@ export default function AIAssistantChat() {
       </div>
 
       {/* Input */}
-      <div className="px-4 py-4 bg-slate-900/60 border-t border-white/5">
-        <form onSubmit={handleSubmit} className="flex items-center bg-slate-800/50 rounded-2xl border border-slate-700 focus-within:border-blue-500/50 focus-within:ring-1 focus-within:ring-blue-500/20 transition-all duration-300 p-1.5">
+      <div className="px-3 md:px-4 py-3 md:py-4 bg-slate-900/60 border-t border-white/5 pb-safe">
+        <form onSubmit={handleSubmit} className="flex items-center bg-slate-800/50 rounded-2xl border border-slate-700 focus-within:border-blue-500/50 focus-within:ring-1 focus-within:ring-blue-500/20 transition-all duration-300 p-1 md:p-1.5">
           <VoiceInputButton onTranscript={(txt) => setInput((prev) => prev + txt)} />
-          <input type="text" value={input} onChange={(e) => setInput(e.target.value)} placeholder={t.chatPlaceholder} className="flex-1 bg-transparent border-none focus:outline-none text-slate-200 placeholder:text-slate-500 text-sm px-3 py-2" />
-          <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.92 }} type="submit" disabled={!input.trim()} className="p-2.5 rounded-xl bg-blue-600 text-white disabled:opacity-40 hover:bg-blue-500 transition-colors shadow-md shadow-blue-600/20">
+          <input 
+            type="text" 
+            value={input} 
+            onChange={(e) => setInput(e.target.value)} 
+            placeholder={t.chatPlaceholder} 
+            className="flex-1 bg-transparent border-none focus:outline-none text-slate-200 placeholder:text-slate-500 text-sm px-2 md:px-3 py-2" 
+          />
+          <motion.button 
+            whileHover={{ scale: 1.05 }} 
+            whileTap={{ scale: 0.92 }} 
+            type="submit" 
+            disabled={!input.trim()} 
+            className="p-2 md:p-2.5 rounded-xl bg-blue-600 text-white disabled:opacity-40 hover:bg-blue-500 transition-colors shadow-md shadow-blue-600/20"
+          >
             <Send className="w-4 h-4" />
           </motion.button>
         </form>

@@ -17,6 +17,20 @@ export const metadata: Metadata = {
   title: "SmartFinance.ai | Financial Guide for Everyone",
   description:
     "Understand loans, savings, interest and financial decisions in simple language.",
+  appleWebApp: {
+    title: "SmartFinance",
+    statusBarStyle: "black-translucent",
+    capable: true,
+  },
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: "cover",
+  themeColor: "#0f172a",
 };
 
 export default function RootLayout({

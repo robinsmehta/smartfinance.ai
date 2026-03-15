@@ -16,47 +16,43 @@ export default function BackgroundAnimation() {
         animate={{
           scale: [1, 1.2, 1],
           opacity: [0.3, 0.5, 0.3],
-          x: [0, 50, 0],
-          y: [0, -30, 0],
         }}
         transition={{
           duration: 15,
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-blue-600/20 blur-[100px] mix-blend-screen z-10"
+        className="absolute top-[-10%] left-[-10%] w-[300px] md:w-[500px] h-[300px] md:h-[500px] rounded-full bg-blue-600/20 blur-[60px] md:blur-[100px] mix-blend-screen z-10"
       />
 
       <motion.div
         animate={{
           scale: [1, 1.4, 1],
           opacity: [0.2, 0.4, 0.2],
-          x: [0, -60, 0],
-          y: [0, 40, 0],
         }}
         transition={{
           duration: 18,
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-cyan-500/10 blur-[120px] mix-blend-screen z-10"
+        className="absolute bottom-[-10%] right-[-10%] w-[400px] md:w-[600px] h-[400px] md:h-[600px] rounded-full bg-cyan-500/10 blur-[80px] md:blur-[120px] mix-blend-screen z-10"
       />
 
-      <motion.div
-        animate={{
-          scale: [1, 1.1, 1],
-          opacity: [0.1, 0.3, 0.1],
-          x: [0, 30, 0],
-          y: [0, 60, 0],
-        }}
-        transition={{
-          duration: 12,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2,
-        }}
-        className="absolute top-[30%] left-[60%] w-[400px] h-[400px] rounded-full bg-purple-500/10 blur-[90px] mix-blend-screen z-10"
-      />
+      <div className="hidden md:block">
+        <motion.div
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.1, 0.3, 0.1],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
+          }}
+          className="absolute top-[30%] left-[60%] w-[400px] h-[400px] rounded-full bg-purple-500/10 blur-[90px] mix-blend-screen z-10"
+        />
+      </div>
     </div>
   );
 }
