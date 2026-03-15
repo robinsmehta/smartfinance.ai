@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 
-from services.ai_service import build_response
+from services.llm_client import chat_completion, RateLimitError
 
 
 chat_bp = Blueprint("chat", __name__, url_prefix="/api")
@@ -14,5 +14,14 @@ def handle_chat():
     if not message:
         return jsonify({"error": "message is required"}), 400
 
-    reply = build_response(message)
-    return jsonify({"reply": reply})
+    try:
+        reply = chat_completion([
+            {"role": "system", "content": "You are SmartFinance AI, a helpful Nepali-friendly financial assistant."},
+            {"role": "user", "content": message},
+        ])
+        return jsonify({"reply": reply})
+    except RateLimitError as rl_err:
+        return jsonify({"error": str(rl_err)}), 429
+    except Exception as exc:  # pragma: no cover - defensive
+        # Do not leak internal details to the client
+        return jsonify({"error": "SmartFinance AI is temporarily unavailable. Please try again in a moment."}), 500
