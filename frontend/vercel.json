@@ -1,10 +1,9 @@
 {
   "framework": "nextjs",
-  "rootDirectory": "frontend",
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://smartfinance-ai-backend.vercel.app/api/:path*"
+      "destination": "/api/:path*"
     }
   ]
 }
