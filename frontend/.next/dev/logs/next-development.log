@@ -13,3 +13,9 @@
 [00:35:44.958] Server  LOG     ✓ Compiled in 165ms
 [00:36:01.000] Server  LOG     ✓ Compiled in 38ms
 [00:36:19.203] Server  LOG     ✓ Compiled in 38ms
+[00:41:03.892] Server  LOG     ✓ Compiled in 44ms
+[00:41:04.581] Browser ERROR   uncaughtError: ReferenceError: isMobileMenuOpen is not defined
+[00:41:09.980] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:41:10.092] Server  LOG     ✓ Compiled in 38ms
+[00:41:10.430] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:41:22.147] Server  LOG     ✓ Compiled in 38ms

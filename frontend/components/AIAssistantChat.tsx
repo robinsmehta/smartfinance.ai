@@ -125,15 +125,25 @@ export default function AIAssistantChat() {
               transition={{ duration: 0.28 }}
               className={clsx("flex w-full", msg.role === "user" ? "justify-end" : "justify-start")}
             >
-              <div className={clsx("flex gap-3 max-w-[82%] md:max-w-[70%]", msg.role === "user" ? "flex-row-reverse" : "flex-row")}>
-                <div className={clsx("flex-shrink-0 h-8 w-8 mt-1 rounded-full flex items-center justify-center border text-xs", msg.role === "user" ? "bg-slate-700 border-slate-600" : "bg-blue-600/10 border-blue-500/30")}>
-                  {msg.role === "user" ? <User className="w-4 h-4 text-slate-300" /> : <Bot className="w-4 h-4 text-blue-400" />}
+              <div className={clsx("flex gap-3 max-w-[85%] md:max-w-[75%]", msg.role === "user" ? "flex-row-reverse" : "flex-row")}>
+                <div className={clsx(
+                  "flex-shrink-0 h-8 w-8 mt-1 rounded-full flex items-center justify-center border shadow-sm",
+                  msg.role === "user" 
+                    ? "bg-slate-700 border-slate-600" 
+                    : "bg-gradient-to-br from-blue-600 to-indigo-600 border-blue-400/30"
+                )}>
+                  {msg.role === "user" ? <User className="w-4 h-4 text-slate-300" /> : <Bot className="w-4 h-4 text-white" />}
                 </div>
-                <div className={clsx("flex flex-col gap-1", msg.role === "user" ? "items-end" : "items-start")}>
-                  <div className={clsx("px-4 py-3 rounded-2xl text-sm", msg.role === "user" ? "bg-blue-600 text-white rounded-tr-sm shadow-lg shadow-blue-600/20" : "bg-slate-800 rounded-tl-sm border border-slate-700/50 min-w-[200px]")}>
-                    {msg.role === "assistant" ? <RenderMessage content={msg.content} /> : <p className="leading-relaxed whitespace-pre-wrap">{msg.content}</p>}
+                <div className={clsx("flex flex-col gap-1.5", msg.role === "user" ? "items-end" : "items-start")}>
+                  <div className={clsx(
+                    "px-4 py-3 rounded-2xl text-sm leading-relaxed",
+                    msg.role === "user" 
+                      ? "bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-tr-sm shadow-lg shadow-blue-900/20" 
+                      : "bg-slate-800/80 backdrop-blur-sm rounded-tl-sm border border-slate-700/50 text-slate-100 shadow-xl"
+                  )}>
+                    {msg.role === "assistant" ? <RenderMessage content={msg.content} /> : <p className="whitespace-pre-wrap">{msg.content}</p>}
                   </div>
-                  <span className="text-[10px] text-slate-600 px-1">{formatTime(msg.timestamp)}</span>
+                  <span className="text-[10px] text-slate-500 font-medium px-1 uppercase tracking-wider">{formatTime(msg.timestamp)}</span>
                 </div>
               </div>
             </motion.div>
@@ -142,9 +152,18 @@ export default function AIAssistantChat() {
 
         {isTyping && (
           <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-3">
-            <div className="h-8 w-8 rounded-full bg-blue-600/10 border border-blue-500/30 flex items-center justify-center"><Bot className="w-4 h-4 text-blue-400" /></div>
-            <div className="bg-slate-800 border border-slate-700/50 rounded-2xl rounded-tl-sm px-4 py-3 flex items-center gap-1.5">
-              {[0, 1, 2].map((i) => <span key={i} className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-bounce" style={{ animationDelay: `${i * 0.15}s` }} />)}
+            <div className="h-8 w-8 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 border border-blue-400/30 flex items-center justify-center shadow-sm">
+              <Bot className="w-4 h-4 text-white" />
+            </div>
+            <div className="bg-slate-800/80 backdrop-blur-sm border border-slate-700/50 rounded-2xl rounded-tl-sm px-4 py-3.5 flex items-center gap-1.5 shadow-xl">
+              {[0, 1, 2].map((i) => (
+                <motion.span 
+                  key={i} 
+                  animate={{ scale: [0.8, 1.2, 0.8], opacity: [0.5, 1, 0.5] }}
+                  transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.2 }}
+                  className="w-1.5 h-1.5 rounded-full bg-blue-400" 
+                />
+              ))}
             </div>
           </motion.div>
         )}
