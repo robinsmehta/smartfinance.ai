@@ -63,8 +63,7 @@ def chat_completion(messages: List[Dict[str, Any]], model: str = "gpt-5.4") -> s
 
     payload: Dict[str, Any] = {
         "messages": messages,
-        "temperature": 0.4,
-        "max_tokens": 1024,
+        "max_completion_tokens": 1024,
     }
 
     resp = requests.post(url, headers=headers, json=payload, timeout=30)
