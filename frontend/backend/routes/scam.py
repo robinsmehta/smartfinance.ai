@@ -99,7 +99,7 @@ def _call_gpt_for_scam(messages: list) -> dict:
     """Call GPT-4 and parse the JSON response."""
     raw = chat_completion(
         messages,
-        model="gpt-4"
+        model="gpt-5.4"
     )
     raw = raw.strip()
     # Strip markdown fences if present
@@ -117,7 +117,7 @@ def _call_gpt_for_scam(messages: list) -> dict:
 def scam_detector_text():
     data = request.get_json(silent=True) or {}
     text = (data.get("text") or "").strip()
-    model = (data.get("model") or "gpt-4").strip()
+    model = (data.get("model") or "gpt-5.4").strip()
 
     if not text:
         return jsonify({"error": "text is required"}), 400

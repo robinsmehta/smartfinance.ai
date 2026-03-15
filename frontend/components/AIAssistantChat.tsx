@@ -91,11 +91,12 @@ export default function AIAssistantChat() {
         timestamp: new Date() 
       };
       setMessages((prev) => [...prev, aiMsg]);
-    } catch (err) {
+    } catch (err: any) {
+      const displayErr = err?.message || "Sorry, I am having trouble connecting to my brain. Please check your internet or try again later.";
       const errMsg: Message = {
         id: `err-${Date.now()}`,
         role: "assistant",
-        content: "Sorry, I am having trouble connecting to my brain. Please check your internet or try again later.",
+        content: `Error: ${displayErr}`,
         timestamp: new Date()
       };
       setMessages((prev) => [...prev, errMsg]);

@@ -10,7 +10,14 @@ async function postJSON<T>(path: string, body: unknown): Promise<T> {
   });
 
   if (!res.ok) {
-    throw new Error(`Request failed: ${res.status}`);
+    let errorMsg = `Request failed: ${res.status}`;
+    try {
+      const errorData = await res.json();
+      if (errorData.error) errorMsg = errorData.error;
+    } catch {
+      // ignore parse error, use status code
+    }
+    throw new Error(errorMsg);
   }
 
   return (await res.json()) as T;

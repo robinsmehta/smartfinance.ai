@@ -8,12 +8,12 @@ import requests
 
 # Rate limits based on Nexalaris Tech policy
 _RPM_LIMITS = {
-    "gpt-4": 10,
+    "gpt-5.4": 10,
     "gpt-image-1.5": 3
 }
 _WINDOW_SECONDS = 60
 _request_timestamps: Dict[str, Deque[float]] = {
-    "gpt-4": deque(),
+    "gpt-5.4": deque(),
     "gpt-image-1.5": deque()
 }
 
@@ -43,8 +43,8 @@ def _check_rate_limit(model: str) -> None:
     timestamps.append(now)
 
 
-def chat_completion(messages: List[Dict[str, Any]], model: str = "gpt-4") -> str:
-    """Call Nexalaris GPT-4 or gpt-audio-1.5 chat endpoint."""
+def chat_completion(messages: List[Dict[str, Any]], model: str = "gpt-5.4") -> str:
+    """Call Nexalaris GPT-5.4 or gpt-audio-1.5 chat endpoint."""
     _check_rate_limit(model)
 
     api_key = os.environ.get("NEXALARIS_API_KEY")

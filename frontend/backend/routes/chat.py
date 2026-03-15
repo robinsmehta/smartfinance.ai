@@ -10,7 +10,7 @@ chat_bp = Blueprint("chat", __name__, url_prefix="/api")
 def handle_chat():
     data = request.get_json(silent=True) or {}
     message = (data.get("message") or "").strip()
-    model = (data.get("model") or "gpt-4").strip()
+    model = (data.get("model") or "gpt-5.4").strip()
     language = (data.get("language") or "en").strip().lower()
 
     if not message:
@@ -49,6 +49,6 @@ IMAGE GENERATION: You can use [IMAGE_PROMPT: <description>] to include helpful v
         return jsonify({"reply": reply})
     except RateLimitError as rl_err:
         return jsonify({"error": str(rl_err)}), 429
-    except Exception as exc:  # pragma: no cover - defensive
-        # Do not leak internal details to the client
-        return jsonify({"error": "SmartFinance AI is temporarily unavailable. Please try again in a moment."}), 500
+    except Exception as exc:
+        # Temporary: exposing error for debugging
+        return jsonify({"error": f"SmartFinance AI Error: {str(exc)}"}), 500
