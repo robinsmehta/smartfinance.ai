@@ -1,0 +1,5 @@
+[00:00:00.987] Server  LOG     ✓ Ready in 740ms
+[00:00:07.224] Server  ERROR   ⨯ Error: Attempted to call useLanguage() from the server but useLanguage is on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.
+[00:00:07.464] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:07.589] Browser ERROR   uncaughtError: Error: Attempted to call useLanguage() from the server but useLanguage is on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.
+[00:00:23.138] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold

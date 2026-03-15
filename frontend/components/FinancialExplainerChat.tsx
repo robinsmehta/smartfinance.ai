@@ -1,0 +1,192 @@
+"use client";
+
+import { motion, AnimatePresence } from "framer-motion";
+import { Send, Bot, User } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import clsx from "clsx";
+import VoiceInputButton from "@/components/VoiceInputButton";
+import { useLanguage } from "@/lib/LanguageContext";
+import { apiChat } from "@/lib/api";
+
+type Message = {
+  id: string;
+  role: "user" | "assistant";
+  content: string;
+  timestamp: Date;
+};
+
+function formatTime(date: Date) {
+  return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+}
+
+export default function FinancialExplainerChat() {
+  const { t } = useLanguage();
+
+  const initialMessage: Message = {
+    id: "welcome",
+    role: "assistant",
+    content: t.welcomeMessage,
+    timestamp: new Date(),
+  };
+
+  const [messages, setMessages] = useState<Message[]>([initialMessage]);
+  const [input, setInput] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
+  const bottomRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, isTyping]);
+
+  const sendMessage = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+
+    const userMsg: Message = {
+      id: Date.now().toString(),
+      role: "user",
+      content: input.trim(),
+      timestamp: new Date(),
+    };
+
+    setMessages((prev) => [...prev, userMsg]);
+    const query = input.trim();
+    setInput("");
+    setIsTyping(true);
+
+    try {
+      const { reply } = await apiChat(query);
+      const aiMsg: Message = {
+        id: (Date.now() + 1).toString(),
+        role: "assistant",
+        content: reply,
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, aiMsg]);
+    } catch (err) {
+      const fallback: Message = {
+        id: (Date.now() + 2).toString(),
+        role: "assistant",
+        content:
+          "I ran into a connection issue while trying to answer. Please check your network or try again in a moment.",
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, fallback]);
+    } finally {
+      setIsTyping(false);
+    }
+  };
+
+  return (
+    <div className="flex flex-col h-full">
+      <div className="flex-1 overflow-y-auto px-4 md:px-6 py-6 space-y-6">
+        <AnimatePresence>
+          {messages.map((msg) => (
+            <motion.div
+              key={msg.id}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className={clsx(
+                "flex w-full",
+                msg.role === "user" ? "justify-end" : "justify-start"
+              )}
+            >
+              <div
+                className={clsx(
+                  "flex gap-3 max-w-[80%] md:max-w-[70%]",
+                  msg.role === "user" ? "flex-row-reverse" : "flex-row"
+                )}
+              >
+                <div
+                  className={clsx(
+                    "flex-shrink-0 h-8 w-8 mt-1 rounded-full flex items-center justify-center border text-xs font-bold",
+                    msg.role === "user"
+                      ? "bg-slate-700 border-slate-600 text-slate-200"
+                      : "bg-blue-600/10 border-blue-500/30 text-blue-400"
+                  )}
+                >
+                  {msg.role === "user" ? (
+                    <User className="w-4 h-4" />
+                  ) : (
+                    <Bot className="w-4 h-4" />
+                  )}
+                </div>
+
+                <div className={clsx(msg.role === "user" ? "items-end" : "items-start", "flex flex-col gap-1")}>
+                  <div
+                    className={clsx(
+                      "px-4 py-3 rounded-2xl text-sm leading-relaxed",
+                      msg.role === "user"
+                        ? "bg-blue-600 text-white rounded-tr-sm shadow-lg shadow-blue-600/20"
+                        : "bg-slate-800 text-slate-200 rounded-tl-sm border border-slate-700/50"
+                    )}
+                  >
+                    {msg.content}
+                  </div>
+                  <span className="text-[10px] text-slate-600 px-1">
+                    {formatTime(msg.timestamp)}
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+
+        {isTyping && (
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            className="flex items-center gap-3"
+          >
+            <div className="h-8 w-8 rounded-full bg-blue-600/10 border border-blue-500/30 flex items-center justify-center">
+              <Bot className="w-4 h-4 text-blue-400" />
+            </div>
+            <div className="bg-slate-800 border border-slate-700/50 rounded-2xl rounded-tl-sm px-4 py-3 flex items-center gap-1.5">
+              {[0, 1, 2].map((i) => (
+                <span
+                  key={i}
+                  className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-bounce"
+                  style={{ animationDelay: `${i * 0.15}s` }}
+                />
+              ))}
+            </div>
+          </motion.div>
+        )}
+
+        <div ref={bottomRef} />
+      </div>
+
+      <div className="px-4 py-4 bg-slate-900/60 border-t border-white/5">
+        <form
+          onSubmit={sendMessage}
+          className="flex items-center bg-slate-800/50 rounded-2xl border border-slate-700 focus-within:border-blue-500/50 focus-within:ring-1 focus-within:ring-blue-500/20 transition-all duration-300 p-1.5"
+        >
+          <VoiceInputButton onTranscript={(txt) => setInput((prev) => prev + txt)} />
+
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder={t.chatPlaceholder}
+            className="flex-1 bg-transparent border-none focus:outline-none text-slate-200 placeholder:text-slate-500 text-sm px-3 py-2"
+          />
+
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.92 }}
+            type="submit"
+            disabled={!input.trim()}
+            className="p-2.5 rounded-xl bg-blue-600 text-white disabled:opacity-40 disabled:cursor-not-allowed hover:bg-blue-500 transition-colors flex items-center justify-center shadow-md shadow-blue-600/20"
+          >
+            <Send className="w-4 h-4" />
+          </motion.button>
+        </form>
+        <p className="text-center text-[10px] text-slate-600 mt-2">
+          SmartFinance AI may make mistakes. Verify important financial decisions.
+        </p>
+      </div>
+    </div>
+  );
+}
