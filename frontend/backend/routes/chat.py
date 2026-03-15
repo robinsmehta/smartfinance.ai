@@ -10,7 +10,7 @@ chat_bp = Blueprint("chat", __name__, url_prefix="/api")
 def handle_chat():
     data = request.get_json(silent=True) or {}
     message = (data.get("message") or "").strip()
-    model = (data.get("model") or "gpt-5.4").strip()
+    model = (data.get("model") or "gpt-4").strip()
     language = (data.get("language") or "en").strip().lower()
 
     if not message:
