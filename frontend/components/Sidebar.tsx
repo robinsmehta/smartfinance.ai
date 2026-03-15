@@ -1,15 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MessageSquare, LineChart, ShieldCheck, Activity, BookOpen } from "lucide-react";
+import { MessageSquare, LineChart, ShieldCheck } from "lucide-react";
 import { useLanguage } from "@/lib/LanguageContext";
 
 export type SidebarSection =
   | "assistant"
   | "planner"
-  | "fraud"
-  | "health"
-  | "learn";
+  | "fraud";
 
 type Props = {
   activeSection: SidebarSection;
@@ -22,16 +20,12 @@ const items: {
   labelKey:
     | "aiAssistant"
     | "loanPlanner"
-    | "fraudProtection"
-    | "financialHealth"
-    | "learnFinance";
+    | "fraudProtection";
   accent: string;
 }[] = [
   { id: "assistant", icon: MessageSquare, labelKey: "aiAssistant", accent: "from-blue-500/80 to-cyan-400/80" },
-  { id: "planner", icon: LineChart, labelKey: "loanPlanner", accent: "from-emerald-500/80 to-cyan-400/80" },
   { id: "fraud", icon: ShieldCheck, labelKey: "fraudProtection", accent: "from-red-500/80 to-amber-400/80" },
-  { id: "health", icon: Activity, labelKey: "financialHealth", accent: "from-sky-500/80 to-violet-400/80" },
-  { id: "learn", icon: BookOpen, labelKey: "learnFinance", accent: "from-indigo-500/80 to-cyan-400/80" },
+  { id: "planner", icon: LineChart, labelKey: "loanPlanner", accent: "from-emerald-500/80 to-cyan-400/80" },
 ];
 
 export default function Sidebar({ activeSection, onSelect }: Props) {

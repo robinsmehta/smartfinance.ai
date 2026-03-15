@@ -6,35 +6,25 @@ import Navbar from "@/components/Navbar";
 import BackgroundAnimation from "@/components/BackgroundAnimation";
 import Sidebar, { SidebarSection } from "@/components/Sidebar";
 import AIAssistantChat from "@/components/AIAssistantChat";
-import LoanInvestmentPlanner from "@/components/LoanInvestmentPlanner";
+import PersonalFinanceAnalyzer from "@/components/PersonalFinanceAnalyzer";
 import ScamProtection from "@/components/ScamProtection";
-import FinancialHealthDashboard from "@/components/FinancialHealthDashboard";
-import LearningModules from "@/components/LearningModules";
 import { useLanguage } from "@/lib/LanguageContext";
 
 const sectionMeta: Record<
   SidebarSection,
-  { titleKey: "aiAssistant" | "loanPlanner" | "fraudProtection" | "financialHealth" | "learnFinance"; sub: string }
+  { titleKey: "aiAssistant" | "loanPlanner" | "fraudProtection"; sub: string }
 > = {
   assistant: {
     titleKey: "aiAssistant",
     sub: "Chat with an AI guide about loans, savings, banking, and scams.",
   },
-  planner: {
-    titleKey: "loanPlanner",
-    sub: "Plan EMIs, savings, and investments around your life goals.",
-  },
   fraud: {
     titleKey: "fraudProtection",
     sub: "Scan messages and screenshots for fraud and scam risks.",
   },
-  health: {
-    titleKey: "financialHealth",
-    sub: "Measure your SmartFinance score and understand your cash flow.",
-  },
-  learn: {
-    titleKey: "learnFinance",
-    sub: "Learn banking, interest, loans, and digital payments in simple language.",
+  planner: {
+    titleKey: "loanPlanner",
+    sub: "Analyze cash flow, project savings growth, and get smart loan suggestions.",
   },
 };
 
@@ -42,7 +32,8 @@ export default function ChatPage() {
   const [activeSection, setActiveSection] = useState<SidebarSection>("assistant");
   const { t } = useLanguage();
 
-  const meta = sectionMeta[activeSection];
+  // Guard: if somehow activeSection isn't in sectionMeta, fall back to assistant
+  const meta = sectionMeta[activeSection] ?? sectionMeta["assistant"];
 
   return (
     <main className="relative w-full h-screen flex flex-col overflow-hidden">
@@ -80,10 +71,8 @@ export default function ChatPage() {
                 className="absolute inset-0 overflow-auto"
               >
                 {activeSection === "assistant" && <AIAssistantChat />}
-                {activeSection === "planner" && <LoanInvestmentPlanner />}
                 {activeSection === "fraud" && <ScamProtection />}
-                {activeSection === "health" && <FinancialHealthDashboard />}
-                {activeSection === "learn" && <LearningModules />}
+                {activeSection === "planner" && <PersonalFinanceAnalyzer />}
               </motion.div>
             </AnimatePresence>
           </div>

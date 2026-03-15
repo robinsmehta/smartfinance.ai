@@ -84,7 +84,7 @@ const PageContent = () => {
             <h3 className="text-xl md:text-2xl font-semibold text-white">Contact Information</h3>
             <div>
               <h4 className="font-semibold text-slate-300">Email</h4>
-              <a href="mailto:support@smartfinance.ai" className="text-blue-400 hover:text-blue-300 transition-colors">support@smartfinance.ai</a>
+              <a href="mailto:support@smartfinance.ai" className="text-blue-400 hover:text-blue-300 transition-colors">text@smartfinance.ai</a>
             </div>
             <div>
               <h4 className="font-semibold text-slate-300">Location</h4>

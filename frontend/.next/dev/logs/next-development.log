@@ -1,23 +1,4 @@
-[00:00:00.987] Server  LOG     ✓ Ready in 740ms
-[00:00:07.224] Server  ERROR   ⨯ Error: Attempted to call useLanguage() from the server but useLanguage is on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.
-[00:00:07.464] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:07.589] Browser ERROR   uncaughtError: Error: Attempted to call useLanguage() from the server but useLanguage is on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.
-[00:00:23.138] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:24:43.683] Server  ERROR   ⨯ Error: Attempted to call useLanguage() from the server but useLanguage is on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.
-[00:24:43.883] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:24:44.001] Browser ERROR   uncaughtError: Error: Attempted to call useLanguage() from the server but useLanguage is on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.
-[00:25:22.454] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:25:22.585] Server  LOG     ✓ Compiled in 5ms
-[00:25:22.613] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:26:38.883] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:26:41.244] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:26:43.941] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:27:57.784] Server  LOG     ✓ Compiled in 51ms
-[00:29:36.975] Server  LOG     ✓ Compiled in 47ms
-[00:29:55.783] Server  LOG     ✓ Compiled in 45ms
-[00:30:02.044] Server  LOG     ✓ Compiled in 60ms
-[00:30:09.341] Server  LOG     ✓ Compiled in 17ms
-[00:30:22.401] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:34:57.003] Server  WARN    ⚠ Cross origin request detected from 172.20.10.183 to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
-Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
-[00:34:57.080] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:00.873] Server  LOG     ✓ Ready in 688ms
+[00:00:05.951] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:56.780] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:45.417] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
